@@ -6,12 +6,13 @@
       "name": "ccweb-playwright-setup",
       "dependencies": {
         "@joshski/dust": "^0.1.22",
-        "playwright": "^1.58.2",
       },
       "devDependencies": {
         "@types/bun": "latest",
+        "playwright": "^1.58.2",
       },
       "peerDependencies": {
+        "playwright": ">=1.40.0",
         "typescript": "^5",
       },
     },
