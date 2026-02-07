@@ -3,14 +3,19 @@
   "module": "index.ts",
   "type": "module",
   "private": true,
+  "exports": {
+    ".": "./index.ts",
+    "./preload": "./preload.ts"
+  },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "playwright": "^1.58.2"
   },
   "peerDependencies": {
-    "typescript": "^5"
+    "typescript": "^5",
+    "playwright": ">=1.40.0"
   },
   "dependencies": {
-    "@joshski/dust": "^0.1.22",
-    "playwright": "^1.58.2"
+    "@joshski/dust": "^0.1.22"
   }
 }
