@@ -14,16 +14,7 @@ test(
       },
     });
 
-    const browser = await chromium.launch({
-      executablePath: "/root/.cache/ms-playwright/chromium-1194/chrome-linux/chrome",
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-        "--disable-dev-shm-usage",
-        "--disable-gpu",
-      ],
-    });
-
+    const browser = await chromium.launch();
     try {
       const page = await browser.newPage();
       await page.goto(server.url.toString());
