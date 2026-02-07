@@ -1,9 +1,7 @@
-import { existsSync } from "fs";
+import { existsSync, readdirSync } from "fs";
+import { join } from "path";
 
-const CHROMIUM_SEARCH_PATHS = [
-  "/root/.cache/ms-playwright/chromium-1194/chrome-linux/chrome",
-  "/root/.cache/ms-playwright/chromium_headless_shell-1194/chrome-linux/headless_shell",
-];
+const PLAYWRIGHT_CACHE = "/root/.cache/ms-playwright";
 
 const DEFAULT_ARGS = [
   "--no-sandbox",
@@ -17,9 +15,24 @@ export function isClaudeCodeWeb(): boolean {
 }
 
 export function findChromium(): string | undefined {
-  for (const path of CHROMIUM_SEARCH_PATHS) {
-    if (existsSync(path)) return path;
+  if (!existsSync(PLAYWRIGHT_CACHE)) return undefined;
+
+  const entries = readdirSync(PLAYWRIGHT_CACHE).sort().reverse();
+
+  // Prefer full chromium over headless shell
+  for (const pattern of [/^chromium-\d+$/, /^chromium_headless_shell-\d+$/]) {
+    for (const entry of entries) {
+      if (!pattern.test(entry)) continue;
+      const candidates = [
+        join(PLAYWRIGHT_CACHE, entry, "chrome-linux", "chrome"),
+        join(PLAYWRIGHT_CACHE, entry, "chrome-linux", "headless_shell"),
+      ];
+      for (const path of candidates) {
+        if (existsSync(path)) return path;
+      }
+    }
   }
+
   return undefined;
 }
 
