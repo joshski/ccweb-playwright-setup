@@ -15,7 +15,7 @@ test(
     });
 
     const browser = await chromium.launch({
-      channel: "chromium",
+      executablePath: "/root/.cache/ms-playwright/chromium-1194/chrome-linux/chrome",
       args: [
         "--no-sandbox",
         "--disable-setuid-sandbox",

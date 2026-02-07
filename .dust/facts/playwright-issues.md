@@ -11,9 +11,9 @@ resolution failures in this environment. The download retries multiple times and
 ultimately fails.
 
 **Workaround:** A pre-cached Chromium browser exists at
-`/root/.cache/ms-playwright/chromium-1194/` (Chromium 141.0.7390.37). Installing
-`playwright@1.56.1` (instead of the latest) matches this cached browser revision
-(1194), so no download is needed.
+`/root/.cache/ms-playwright/chromium-1194/chrome-linux/chrome` (Chromium 141.0.7390.37).
+Use `executablePath` to point Playwright at this binary, which allows using any
+version of Playwright (including the latest) without downloading browsers.
 
 ## Chromium Launch Requires Special Args
 
@@ -28,12 +28,20 @@ Without these flags, the browser either fails to launch or crashes during page
 interactions (locator API calls result in "Target page, context or browser has
 been closed" errors).
 
-## Channel Option Required
+## Working Launch Configuration
 
-The `channel: "chromium"` option must be passed to `chromium.launch()`. Without
-it, the Playwright locator API (e.g., `heading.textContent()`, `heading.isVisible()`)
-causes the page to crash, even though `page.evaluate()` works. Setting the channel
-resolves this.
+Use `executablePath` to bypass browser download requirements entirely:
+
+```ts
+const browser = await chromium.launch({
+  executablePath: "/root/.cache/ms-playwright/chromium-1194/chrome-linux/chrome",
+  args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage", "--disable-gpu"],
+});
+```
+
+This works with the latest Playwright (tested with 1.58.2) despite the cached
+browser being from an older revision (1194 / Chromium 141). The `channel` option
+is not needed when `executablePath` is specified.
 
 ## Playwright Matchers Not Available in bun:test
 
