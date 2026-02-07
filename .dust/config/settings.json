@@ -3,7 +3,11 @@
   "checks": [
     {
       "name": "test",
-      "command": "bun test"
+      "command": "bun test --ignore=system-tests"
+    },
+    {
+      "name": "system-test",
+      "command": "bun test ./system-tests/"
     }
   ]
 }

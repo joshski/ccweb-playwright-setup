@@ -1,5 +1,7 @@
 # Playwright Installation Issues
 
+Known issues and workarounds for running Playwright in the Claude Code Web container environment.
+
 ## Browser Download Fails (DNS Resolution)
 
 Running `bunx playwright install chromium` fails with:

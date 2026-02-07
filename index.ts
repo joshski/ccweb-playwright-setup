@@ -11,7 +11,8 @@ const DEFAULT_ARGS = [
 ];
 
 export function isClaudeCodeWeb(): boolean {
-  return process.env.CLAUDE_CODE_ENTRYPOINT === "remote_desktop";
+  const entrypoint = process.env.CLAUDE_CODE_ENTRYPOINT;
+  return entrypoint === "remote_desktop" || entrypoint === "remote";
 }
 
 export function findChromium(): string | undefined {
