@@ -4,14 +4,13 @@
   "workspaces": {
     "": {
       "name": "ccweb-playwright-setup",
-      "dependencies": {
+      "devDependencies": {
         "@joshski/dust": "^0.1.22",
+        "@types/bun": "latest",
         "playwright": "^1.58.2",
       },
-      "devDependencies": {
-        "@types/bun": "latest",
-      },
       "peerDependencies": {
+        "playwright": ">=1.40.0",
         "typescript": "^5",
       },
     },
