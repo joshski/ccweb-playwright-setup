@@ -59,7 +59,7 @@ const browser = await chromium.launch(launchOptions());
 
 The preload script:
 
-1. Checks `CLAUDE_CODE_ENTRYPOINT` to detect Claude Code web
+1. Checks `CLAUDE_CODE_REMOTE` to detect Claude Code web
 2. Finds the pre-cached Chromium binary
 3. Wraps `chromium.launch()` to inject `executablePath` and container-required args (`--no-sandbox`, `--disable-setuid-sandbox`, `--disable-dev-shm-usage`, `--disable-gpu`)
 4. Preserves any options you pass — your overrides take priority
