@@ -8,6 +8,8 @@ const DEFAULT_ARGS = [
   "--disable-setuid-sandbox",
   "--disable-dev-shm-usage",
   "--disable-gpu",
+  "--single-process",
+  "--no-zygote",
 ];
 
 export function isClaudeCodeWeb(): boolean {

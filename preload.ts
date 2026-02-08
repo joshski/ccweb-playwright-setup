@@ -11,6 +11,8 @@ if (isClaudeCodeWeb()) {
       "--disable-setuid-sandbox",
       "--disable-dev-shm-usage",
       "--disable-gpu",
+      "--single-process",
+      "--no-zygote",
     ];
 
     chromium.launch = async (options = {}) => {
